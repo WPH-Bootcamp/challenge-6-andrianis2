@@ -6,6 +6,12 @@
 // Fungsi ini tidak mengembalikan nilai (void)
 // Petunjuk: pikirkan bagaimana cara menambahkan buku ke array yang sudah disediakan
 
+import type { BookType } from '../types';
+import { books } from '../data/books';
+
+export function addBook(book: BookType): void {
+  books.push(book);
+}
 
 // Fungsi listBooks
 // Fungsi ini digunakan untuk menampilkan semua buku yang tersimpan
@@ -13,6 +19,17 @@
 // Fungsi ini tidak mengembalikan nilai (void)
 // Petunjuk: pikirkan cara menampilkan data buku dengan format yang mudah dibaca
 
+export function listBooks(): void {
+  if (books.length === 0) {
+    console.log('Empty List');
+  } else {
+    books.forEach((book, index) => {
+      console.log(
+        `${index + 1} - ${book.title} - ${book.author} - ${book.publicationYear} `
+      );
+    });
+  }
+}
 
 // Fungsi searchBook
 // Fungsi ini digunakan untuk mencari buku berdasarkan judul
@@ -21,3 +38,18 @@
 // Petunjuk: jika parameter title diberikan, cari buku yang cocok
 //           jika tidak diberikan, tampilkan semua buku atau berikan informasi yang sesuai
 
+export function searchBook(title?: string): void {
+  let found = false;
+  books.forEach((book, index) => {
+    if (title === '') {
+      console.log('Empty Searching Book !');
+    } else if (book.title.toLowerCase() === title?.toLowerCase()) {
+      console.log(
+        `${index + 1} - ${book.title} - ${book.author} - ${book.publicationYear} `
+      );
+      found = true;
+    } else {
+      console.log('No Book Found !');
+    }
+  });
+}
